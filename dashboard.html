@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="dashboard.js" defer></script>
+</head>
+<body>
+<div id="dashboard-container">
+    <h1>Tutor Dashboard</h1>
+
+    <h2>Welcome, <span id="account-name"></span></h2>
+    <p>Email: <span id="account-email"></span></p>
+    <p id="account-message"></p> <!-- Added for error messages -->
+
+    <label for="teacher-code">Add Skill via Teacher Code:</label>
+    <input type="text" id="teacher-code">
+    <button onclick="updateTutor()">Update Skill</button>
+
+    <p>Manage your tutoring visibility below:</p>
+
+    <!-- Subject Selection -->
+    <label for="subject">Select a Subject:</label>
+    <select id="subject">
+        <option value="">--Select a Subject--</option>
+        <option value="Math">Math</option>
+        <option value="Biology">Biology</option>
+        <option value="Chemistry">Chemistry</option>
+        <option value="Physics">Physics</option>
+        <option value="Computer Science">Computer Science</option>
+        <option value="English">English</option>
+        <option value="Social Studies">Social Studies</option>
+    </select>
+
+    <!-- Subcategory Selection -->
+    <div id="subcategory-container"></div>
+
+    <div class="nav-buttons">
+        <button onclick="logout()">Logout</button>
+    </div>
+</div>
+</body>
+</html>
