@@ -1,45 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
-    <script type="module" src="dashboard.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="dashboard.js" defer></script>
+
+  <style>
+    /* Optional: move to styles.css later */
+    .teacher-code-container {
+      margin-left: 20px; /* adjust this as needed */
+      margin-bottom: 20px;
+    }
+
+    .blue-button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .blue-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-<div id="dashboard-container">
+  <div id="dashboard-container">
     <h1>Tutor Dashboard</h1>
 
     <h2>Welcome, <span id="account-name"></span></h2>
     <p>Email: <span id="account-email"></span></p>
-    <p id="account-message"></p> <!-- Added for error messages -->
+    <p id="account-message"></p>
 
-    <label for="teacher-code">Add Skill via Teacher Code:</label>
-    <input type="text" id="teacher-code">
-    <button onclick="updateTutor()">Update Skill</button>
+    <!-- Teacher code input -->
+    <div class="teacher-code-container">
+      <label for="teacher-code">Add Skill via Teacher Code:</label><br />
+      <input type="text" id="teacher-code">
+      <button onclick="updateTutor()">Update Skill</button>
+    </div>
 
     <p>Manage your tutoring visibility below:</p>
 
     <!-- Subject Selection -->
     <label for="subject">Select a Subject:</label>
     <select id="subject">
-        <option value="">--Select a Subject--</option>
-        <option value="Math">Math</option>
-        <option value="Biology">Biology</option>
-        <option value="Chemistry">Chemistry</option>
-        <option value="Physics">Physics</option>
-        <option value="Computer Science">Computer Science</option>
-        <option value="English">English</option>
-        <option value="Social Studies">Social Studies</option>
+      <option value="">--Select a Subject--</option>
+      <option value="Math">Math</option>
+      <option value="Biology">Biology</option>
+      <option value="Chemistry">Chemistry</option>
+      <option value="Physics">Physics</option>
+      <option value="Computer Science">Computer Science</option>
+      <option value="English">English</option>
+      <option value="Social Studies">Social Studies</option>
     </select>
 
     <!-- Subcategory Selection -->
     <div id="subcategory-container"></div>
 
+    <!-- Service Hours Navigation -->
+    <button class="blue-button" onclick="window.location.href='service-hours.html'">
+      Manage Service Hours
+    </button>
+
     <div class="nav-buttons">
-        <button onclick="logout()">Logout</button>
+      <button onclick="logout()">Logout</button>
     </div>
-</div>
+  </div>
 </body>
 </html>
