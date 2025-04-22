@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Service Hours</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="service-hours.js" defer></script>
+  <style>
+    #service-hours-container {
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    input, textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    .green-button, .blue-button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="service-hours-container">
+    <h2>Log Service Hours</h2>
+    <form id="serviceHoursForm">
+      <label for="date">Date:</label>
+      <input type="date" name="date" required />
+
+      <label for="hours">Hours:</label>
+      <input type="number" name="hours" min="0.1" step="0.1" required />
+
+      <label for="description">Description:</label>
+      <textarea name="description" rows="3" placeholder="Optional..."></textarea>
+
+      <label for="teacher_code">Teacher Code:</label>
+      <input type="text" name="teacher_code" placeholder="Leave blank if none" />
+
+      <button type="submit" class="green-button">Log Hours</button>
+    </form>
+
+    <button onclick="window.location.href='dashboard.html'" class="blue-button">Back to Dashboard</button>
+
+    <p id="form-message"></p>
+  </div>
+</body>
+</html>
