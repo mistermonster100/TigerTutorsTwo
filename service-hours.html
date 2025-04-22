@@ -3,53 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Service Hours</title>
+  <title>Manage Service Hours</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- load YOUR JS; must exactly match the filename on disk -->
   <script type="module" src="service-hours.js" defer></script>
   <style>
-    #service-hours-container {
-      max-width: 500px;
-      margin: 40px auto;
+    /* minimal styling—move to styles.css if you like */
+    body {
+      font-family: sans-serif;
+      background: #f2f2f2;
+      margin: 0;
       padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      background-color: #f9f9f9;
     }
-
-    input, textarea {
-      width: 100%;
-      margin-bottom: 10px;
-      padding: 8px;
-      box-sizing: border-box;
+    #container {
+      max-width: 480px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-
-    .green-button, .blue-button {
-      margin-top: 10px;
+    label { display: block; margin-top: 12px; }
+    input, textarea { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+    button {
+      margin-top: 16px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
     }
+    .primary { background: #28a745; color: #fff; }
+    .primary:hover { background: #218838; }
+    .secondary { background: #007bff; color: #fff; margin-left: 8px; }
+    .secondary:hover { background: #0056b3; }
+    #formMessage { margin-top: 16px; font-weight: bold; }
+    #hoursList { margin-top: 24px; list-style: none; padding: 0; }
+    #hoursList li { padding: 8px 0; border-bottom: 1px solid #ddd; }
   </style>
 </head>
 <body>
-  <div id="service-hours-container">
+  <div id="container">
     <h2>Log Service Hours</h2>
     <form id="serviceHoursForm">
-      <label for="date">Date:</label>
-      <input type="date" name="date" required />
+      <label for="dateInput">Date</label>
+      <input type="date" id="dateInput" name="date" required />
 
-      <label for="hours">Hours:</label>
-      <input type="number" name="hours" min="0.1" step="0.1" required />
+      <label for="hoursInput">Hours</label>
+      <input type="number" id="hoursInput" name="hours"
+             min="0.1" step="0.1" placeholder="e.g. 1.5" required />
 
-      <label for="description">Description:</label>
-      <textarea name="description" rows="3" placeholder="Optional..."></textarea>
+      <label for="descInput">Description <small>(optional)</small></label>
+      <textarea id="descInput" name="description" rows="3"></textarea>
 
-      <label for="teacher_code">Teacher Code:</label>
-      <input type="text" name="teacher_code" placeholder="Leave blank if none" />
+      <label for="codeInput">Teacher Code <small>(leave blank if none)</small></label>
+      <input type="text" id="codeInput" name="teacher_code" />
 
-      <button type="submit" class="green-button">Log Hours</button>
+      <button type="submit" class="primary">Log Hours</button>
+      <button type="button" class="secondary"
+              onclick="window.location.href='dashboard.html'">
+        Back to Dashboard
+      </button>
     </form>
 
-    <button onclick="window.location.href='dashboard.html'" class="blue-button">Back to Dashboard</button>
+    <div id="formMessage"></div>
 
-    <p id="form-message"></p>
+    <h3>Your Previous Entries</h3>
+    <ul id="hoursList"></ul>
   </div>
 </body>
 </html>
