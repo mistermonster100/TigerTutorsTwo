@@ -72,16 +72,25 @@ form.addEventListener("submit", async e => {
     msgEl.style.color = "red";
     return;
   }
-
-  // Gather values
-  const date         = dateInput.value;
-  const hours        = parseFloat(hoursInput.value);
-  const description  = descInput.value.trim();
+//get values
   const teacher_code = codeInput.value.trim();
   const verified     = teacher_code && teacherMap.hasOwnProperty(teacher_code);
+  // LOOK HERE ↓↓↓
+  const teacher_name = verified
+    ? teacherMap[teacher_code]
+    : null;
 
-  // Build the entry
-  const entry = { date, hours, description, teacher_code, verified, timestamp: new Date() };
+  // Build the entry (now with the name)
+  const entry = {
+    date,
+    hours,
+    description,
+    teacher_code,
+    verified,
+    teacher_name,      // ← new field
+    timestamp: new Date()
+  };
+
 
   try {
     await addDoc(
@@ -111,9 +120,20 @@ async function fetchAndDisplay() {
   snap.forEach(doc => {
     const d = doc.data();
     const li = document.createElement("li");
-    li.textContent = `${d.date} — ${d.hours} hr${d.hours !== 1 ? "s" : ""} ` +
-      `[${d.verified ? "Verified" : "Unverified"}]` +
-      (d.description ? ` • ${d.description}` : "");
-    listEl.appendChild(li);
+        let text = 
+      `${d.date} — ${d.hours} hr${d.hours !== 1 ? "s" : ""} ` +
+      `[${d.verified ? "Verified" : "Unverified"}]`;
+
+// append the user’s description, if any
+    if (d.description) {
+      text += ` • ${d.description}`;
+    }
+
+// **NEW**: if we have a teacher name, tack it on
+    if (d.teacher_name) {
+      text += ` — Verified by ${d.teacher_name}`;
+    }
+
+    li.textContent = text;
   });
 }
