@@ -49,7 +49,10 @@ let currentUser = null;
 
 // 6) Watch auth; only once we know the user do we enable the form & fetch entries
 onAuthStateChanged(auth, user => {
-  currentUser = user;
+  console.log(auth);
+  console.log(user);
+  console.log(localStorage);
+  //currentUser = localStorage;
   if (user) {
     form.querySelector("button[type=submit]").disabled = false;
     fetchAndDisplay();
