@@ -85,7 +85,7 @@ form.addEventListener("submit", async e => {
 
   try {
     await addDoc(
-      collection(db, "users", currentUser.uid, "service_hours"),
+      collection(db, "users", currentUser, "service_hours"),
       entry
     );
     msgEl.textContent = "✅ Logged successfully";
@@ -103,7 +103,7 @@ form.addEventListener("submit", async e => {
 async function fetchAndDisplay() {
   if (!currentUser) return;
 
-  const colRef = collection(db, "users", currentUser.uid, "service_hours");
+  const colRef = collection(db, "users", currentUser, "service_hours");
   const q      = query(colRef, orderBy("timestamp", "desc"));
   const snap   = await getDocs(q);
 
