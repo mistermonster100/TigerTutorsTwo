@@ -80,8 +80,21 @@ form.addEventListener("submit", async e => {
   const teacher_code = codeInput.value.trim();
   const verified     = teacher_code && teacherMap.hasOwnProperty(teacher_code);
 
-  // Build the entry
-  const entry = { date, hours, description, teacher_code, verified, timestamp: new Date() };
+// ← NEW: pull the human name (or leave blank)
+const teacher_name = verified
+  ? teacherMap[teacher_code]
+  : "";
+
+// Build the entry (now including teacher_name)
+const entry = {
+  date,
+  hours,
+  description,
+  teacher_code,
+  verified,
+  teacher_name,      // ← add this
+  timestamp: new Date()
+};
 
   try {
     await addDoc(
@@ -111,9 +124,21 @@ async function fetchAndDisplay() {
   snap.forEach(doc => {
     const d = doc.data();
     const li = document.createElement("li");
-    li.textContent = `${d.date} — ${d.hours} hr${d.hours !== 1 ? "s" : ""} ` +
-      `[${d.verified ? "Verified" : "Unverified"}]` +
-      (d.description ? ` • ${d.description}` : "");
+
+    // date & hours
+    const header = `${d.date} — ${d.hours} hr${d.hours !== 1 ? "s" : ""}`;
+
+    // build the “Verified by …” or “Unverified”
+    const verificationText = d.teacher_name
+      ? `Verified by ${d.teacher_name}`
+      : "Unverified";
+
+    // if they wrote a description, tack it on; otherwise just show the status
+    const fullDesc = d.description
+      ? `${d.description} — ${verificationText}`
+      : verificationText;
+
+    li.textContent = `${header} • ${fullDesc}`;
     listEl.appendChild(li);
   });
 }
